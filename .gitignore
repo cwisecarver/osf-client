@@ -1,0 +1,94 @@
+# OS generated files
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+*.swp
+*~
+
+# R
+#######################
+.Rhistory
+
+# Python
+#######################
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib64
+__pycache__
+pip-log.txt
+.coverage
+.tox
+nosetests.xml
+*.mo
+.idea
+.hg
+.hgignore
+env/
+mathenv
+cover/
+.konchrc
+
+# Assets
+########
+.webassets-cache
+node_modules
+npm-debug.log
+
+# OSF-specific
+##############
+
+api/static/vendor
+
+# Local settings files
+local.py
+
+website/uploads/
+website/mfrcache/
+website/mfrtemp/
+website/osfstoragecache/
+website/gpg/
+webpack-assets.json
+sauce.json
+
+# Built log templates
+website/templates/_log_templates.mako
+
+# Build JS files
+website/static/built/*
+
+# Logs
+logs/*
+
+# Add-ons
+#########
+.cache/
+.project
+.pydevproject
+.settings/
+src/
+website/mfrtemp/
+docs/_build
+website/static/img/badges
+
+# GUIDS
+scripts/guid_blacklist.txt
+
+# Celery dbs
+celerybeat-schedule.db
+celery_beat.py.db
