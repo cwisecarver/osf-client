@@ -4,7 +4,13 @@
   "description": "An api client for the OSF v2 API.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint *.es6.js || true",
+    "build-min": "browserify ./lib/client.es6.js -t [ babelify ] -g uglifyify -c --standalone OSFClient -o dist/osfclient.min.js || true",
+    "build": "browserify ./lib/client.es6.js -t [ babelify ] --debug --standalone OSFClient -o dist/osfclient.js || true",
+    "build-node": "browserify ./lib/client.es6.js --node --fast -t [ babelify ] --debug -o dist/osfclient.node.js || true",
+    "build-node-min": "browserify ./lib/client.es6.js --node -t [ babelify ] -g uglifyify -c -o dist/osfclient.node.min.js || true",
+    "build-dist": "npm run lint && npm run build && npm run build-min && npm run build-node && npm run build-node-min || true",
+    "watch": "watchify ./lib/client.es6.js --debug -t [ babelify ] --debug --standalone OSFClient -o dist/osfclient.js -v || true"
   },
   "babel": {
     "presets": [
@@ -23,11 +29,16 @@
     }
   },
   "devDependencies": {
-    "eslint": "^1.10.3"
-  },
-  "dependencies": {
+    "babel-eslint": "^4.1.6",
+    "babel-tape-runner": "^1.3.0",
+    "babelify": "^7.2.0",
+    "eslint": "^1.10.3",
+    "faucet": "0.0.1",
     "popsicle": "^1.4.0",
+    "popsicle-basic-auth": "^0.1.0",
     "raven-js": "^1.3.0",
+    "tape": "^4.2.2",
+    "uglifyify": "^3.0.1",
     "underscore": "^1.8.3"
   }
 }
