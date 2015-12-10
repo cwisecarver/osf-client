@@ -46,29 +46,30 @@ test('Running node tests', (t) => {
 
   authedClient.nodes().create(
     {
-      body: {
-        data: {
-          type: 'nodes',
-          attributes: {
-            title: 'api test node',
-            description: 'very description, much words',
-            category: 'project'
-          }
-        }
-      }
+      title: 'api test node',
+      description: 'very description, much words',
+      category: 'project'
     }
   ).then(resp => {
     t.equal(typeof resp.data.id, 'string', 'Created Node.id is a string');
     t.equal(resp.data.id.length, 5, 'Created Node.id is five characters');
     t.equal(resp.data.type, 'nodes', 'Created Node.type is \'nodes\'');
     global.createdNodeID = resp.data.id;
-    authedClient.nodes(global.createdNodeID)
-    .delete()
-    .then(resp => {
-      console.dir(resp);
+    global.createdNodeTitle = resp.data.attributes.title;
+
+    authedClient.nodes(global.createdNodeID).update({attributes:{title:global.createdNodeTitle.split("").reverse().join("")}}).then(resp => {
       t.equal(typeof resp, 'object', 'Response is an object');
+      t.equal(resp.status, 200, 'Updated successfully');
+      t.equal(resp.data.attributes.title, global.createdNodeTitle.split("").reverse().join(""), 'Title updated successfully');
+
+      authedClient.nodes(global.createdNodeID).delete().then(resp => {
+        t.equal(typeof resp, 'object', 'Response is an object');
+        t.equal(resp.status, 204, 'Response contained no content');
+      });
     });
   });
+
+
 
 
 

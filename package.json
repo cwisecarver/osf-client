@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.es6.js || true",
+    "test": "babel-node test/tests.es6.js | node_modules/.bin/tnyan",
     "build-min": "browserify ./lib/client.es6.js -t [ babelify ] -g [ uglifyify --no-sourcemap ] -c --standalone OSFClient -o dist/osfclient.min.js || true",
     "build": "browserify ./lib/client.es6.js -t [ babelify ] --debug --standalone OSFClient -o dist/osfclient.js || true",
     "build-node": "browserify ./lib/client.es6.js --node --fast -t [ babelify ] --debug -o dist/osfclient.node.js || true",
