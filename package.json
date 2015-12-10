@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.es6.js || true",
-    "build-min": "browserify ./lib/client.es6.js -t [ babelify ] -g uglifyify -c --standalone OSFClient -o dist/osfclient.min.js || true",
+    "build-min": "browserify ./lib/client.es6.js -t [ babelify ] -g [ uglifyify --no-sourcemap ] -c --standalone OSFClient -o dist/osfclient.min.js || true",
     "build": "browserify ./lib/client.es6.js -t [ babelify ] --debug --standalone OSFClient -o dist/osfclient.js || true",
     "build-node": "browserify ./lib/client.es6.js --node --fast -t [ babelify ] --debug -o dist/osfclient.node.js || true",
-    "build-node-min": "browserify ./lib/client.es6.js --node -t [ babelify ] -g uglifyify -c -o dist/osfclient.node.min.js || true",
+    "build-node-min": "browserify ./lib/client.es6.js --node -t [ babelify ] -g [ uglifyify --no-sourcemap ] -c -o dist/osfclient.node.min.js || true",
     "build-dist": "npm run lint && npm run build && npm run build-min && npm run build-node && npm run build-node-min || true",
     "watch": "watchify ./lib/client.es6.js --debug -t [ babelify ] --debug --standalone OSFClient -o dist/osfclient.js -v || true"
   },
