@@ -1,5 +1,5 @@
 import test from 'tape';
-import stuff from './tape_common.es6.js';
+import stuff from './common.es6.js';
 
 test('Running client tests', (t) => {
   t.equal(typeof stuff.client.nodes, 'function', 'client.nodes is a function');

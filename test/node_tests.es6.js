@@ -1,13 +1,12 @@
 import test from 'tape';
-import stuff from './tape_common.es6.js';
+import stuff from './common.es6.js';
 import _ from 'underscore';
 
 // setup client
 let client = stuff.client;
 let authedClient = stuff.authedClient;
-let nodeId = null;
 
-test('Running node tests', (t) => {
+test('Running node tests', t => {
   // anonymous tests
   client.nodes().get().then(resp => {
     global.nodeId = resp.data[0].id;
