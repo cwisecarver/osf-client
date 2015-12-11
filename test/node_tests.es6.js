@@ -86,4 +86,5 @@ test('Running authedClient node tests', t => {
       });
     });
   });
+  t.end();
 });

@@ -5,7 +5,7 @@ import _ from 'underscore';
 let client = stuff.client;
 let authedClient = stuff.authedClient;
 
-test('Running collection tests', t => {
+test('Running anonymous collection tests', t => {
   client.collections().get().then(resp => {
     t.equal(typeof resp, 'object', 'The Response Object is an Object');
     t.equal(resp.data.length, 0, 'Anonymous User has no Collections');
@@ -14,7 +14,7 @@ test('Running collection tests', t => {
   t.end();
 });
 
-test('Running collection tests as authorized user.', t => {
+test('Running authedClient collection tests', t => {
   authedClient.collections().get().then(resp => {
     t.equal(typeof resp, 'object', 'The Response Object is an Object');
     t.true(resp.data.length, 'Registered User has Collections');
