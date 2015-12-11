@@ -20,10 +20,25 @@ test('Running node tests', t => {
     t.equal(resp.data.length, 10, 'Response has ten nodes');
   });
 
-  client.nodes().get({query:{embed:'contributors'}}).then(resp => {
+  let embeds = ['contributors', 'node_links', 'comments', 'files', 'logs', 'children'];
+  client.nodes().get({query:{embed:embeds}}).then(resp => {
     _.each(resp.data, (item) => {
-      t.equal(typeof item.embeds.contributors, 'object', 'Contributor was embedded.');
-      t.equal(typeof item.relationships.contributors, 'undefined', 'Contributors are not relationships.');
+      // loop through all the objects inside of data
+      _.each(embeds, embed => {
+        // loop through all the different embed types
+        t.equal(typeof item.embeds[embed], 'object', `${embed} was embedded.`);
+        t.equal(typeof item.relationships[embed], 'undefined', `${embed} is not a relationship.`);
+
+        if(_.isArray(item.embeds[embed])) {
+          _.each(item.embeds[embed], embeddedObj => {
+            t.equal(embeddedObj.id, embeddedObj._data.id, 'Extended version id matches basic version id.');
+            t.deepEqual(embeddedObj.attributes, embeddedObj._data.attributes, 'Extended version attributes matches basic version attributes.');
+          });
+        } else {
+          t.equal(item.embeds[embed].id, item.embeds[embed]._data.id, 'Extended version id matches basic version id.');
+          t.deepEqual(item.embeds[embed].attributes, item.embeds[embed]._data.attributes, 'Extended version attributes matches basic version attributes.');
+        }
+      });
     });
   });
 
