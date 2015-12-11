@@ -6,7 +6,7 @@ import _ from 'underscore';
 let client = stuff.client;
 let authedClient = stuff.authedClient;
 
-test('Running node tests', t => {
+test('Running anonymous node tests', t => {
   // anonymous tests
   client.nodes().get().then(resp => {
     global.nodeId = resp.data[0].id;
@@ -46,6 +46,10 @@ test('Running node tests', t => {
     t.equal(resp.data.length, 0, 'Anonymous users cannot see private nodes.');
   });
 
+  t.end();
+});
+
+test('Running authedClient node tests', t => {
   // tests with authorization
   authedClient.nodes().get().then(resp => {
     t.equal(typeof resp, 'object', 'Response is an object');
@@ -82,14 +86,4 @@ test('Running node tests', t => {
       });
     });
   });
-
-
-
-
-
-
-
-
-
-  t.end();
 });
